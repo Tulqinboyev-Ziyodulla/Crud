@@ -7,24 +7,15 @@ interface ProductListProps {
     deleteProduct: (id: number) => void;
 }
 
-const ProductList: React.FC<ProductListProps> = ({
-    products,
-    updateProduct,
-    deleteProduct,
-}) => {
+const ProductList: React.FC<ProductListProps> = ({ products, updateProduct, deleteProduct, }) => {
     const [editingId, setEditingId] = useState<number | null>(null);
     const [editName, setEditName] = useState('');
     const [editPrice, setEditPrice] = useState<number | ''>('');
 
-    const startEditing = (product: Product) => {
-        setEditingId(product.id);
-        setEditName(product.name);
-        setEditPrice(product.price);
-    };
+    const startEditing = (product: Product) => { setEditingId(product.id); setEditName(product.name); setEditPrice(product.price);};
 
     const saveEdit = () => {
-        if (editingId !== null && editName && editPrice) {
-            updateProduct(editingId, { id: editingId, name: editName, price: Number(editPrice) });
+        if (editingId !== null && editName && editPrice) { updateProduct(editingId, { id: editingId, name: editName, price: (editPrice) });
             setEditingId(null);
             setEditName('');
             setEditPrice('');
@@ -40,25 +31,14 @@ const ProductList: React.FC<ProductListProps> = ({
                         <input type="number" value={editPrice} onChange={(e) => setEditPrice(Number(e.target.value))} className="p-2 border rounded-lg flex-1" />
                         <button onClick={saveEdit} className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600" > Save </button>
                         <button onClick={() => setEditingId(null)} className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600" > Cancel </button>
-                    </div>
-                ) : (
+                    </div> ) : (
                     <>
                         <span>
                             {product.name} - ${product.price}
                         </span>
                         <div className="flex gap-2">
-                            <button
-                                onClick={() => startEditing(product)}
-                                className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600"
-                            >
-                                Edit
-                            </button>
-                            <button
-                                onClick={() => deleteProduct(product.id)}
-                                className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-                            >
-                                Delete
-                            </button>
+                            <button onClick={() => startEditing(product)} className="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600" > Edit </button>
+                            <button onClick={() => deleteProduct(product.id)} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600" > Delete </button>
                         </div>
                     </>
                 )}

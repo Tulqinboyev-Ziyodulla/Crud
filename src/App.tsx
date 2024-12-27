@@ -27,11 +27,7 @@ const App: React.FC = () => {
         <ProductForm addProduct={addProduct} />
       </div>
       <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-lg">
-        <ProductList
-          products={products}
-          updateProduct={updateProduct}
-          deleteProduct={deleteProduct}
-        />
+        <ProductList products={products} updateProduct={updateProduct} deleteProduct={deleteProduct} />
       </div>
     </div>
   );
